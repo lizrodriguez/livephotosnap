@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {{> head}}
+</head>
+<body>
+
+<div id="layout">
+  {{> header}}
+  <div class="content">
+
+    {{#logged_in}}
+    <h3 class="content-subhead">Hello {{email}}! You're now logged in.</h3>
+
+
+    {{> gallery}}
+
+    <h3 class="content-subhead">Would you like to <a href="/gallery/upload"> upload</a> a photo?</h3>
+
+    <p><a href="/logout">Logout</a></p>
+    {{/logged_in}}
+
+
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
+

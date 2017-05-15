@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {{> head}}
+</head>
+<body>
+
+<div id="layout">
+  {{> header}}
+  <div class="content">
+
+    <form class="pure-form" action="/signup" method="post">
+          <h2 class="content-subhead">Sign up here</h2>
+            <input id="email" type="email" name="email" class="validate" placeholder="email">
+            <label for="email"></label>
+
+              <input id="password" type="password" name="password" class="validate" placeholder="password">
+              <label for="password"> </label>
+
+            <button type="submit" class="pure-button pure-button-primary">Register</button>
+
+      </form>
+    </div>
+</div>
+
+</body>
+</html>

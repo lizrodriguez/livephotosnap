@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  {{> head}}
+</head>
+<body>
+
+<div id="layout">
+  {{> header}}
+  <div class="content">
+
+    {{> gallery}}
+
+    {{#logged_in}}
+    <h3 class="content-subhead">Hello {{email}}! You're now logged in.</h3>
+
+    <h2 class="content-subhead">Would you like to <a href="/gallery/upload"> upload </a> a photo?</h2>
+
+    <p><a href="/logout">Logout!</a></p>
+    {{/logged_in}}
+
+    <!-- if not logged in -->
+    {{^logged_in}}
+    <form  class="pure-form" action="/login" method="post">
+
+        <h3>Log in to upload some live photos!</h3>
+
+          <input name="email" type="text" class="form-control" id="inputEmail" placeholder="Email">
+          <label for="email"></label>
+
+            <input id="password" type="password" name="password" class="validate" placeholder="password">
+            <label for="password"> </label>
+
+        <button type="submit" class="pure-button pure-button-primary">Login</button>
+        or <a href="/signup">sign up!</a>
+
+      </form>
+    </div>
+    {{/logged_in}}
+
+</div> <!--end layout-->
+
+
+
+
+</body>
+</html>

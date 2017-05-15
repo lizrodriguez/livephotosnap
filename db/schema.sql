@@ -1,0 +1,18 @@
+DROP TABLE IF EXISTS photos CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+
+CREATE TABLE photos (
+  id SERIAL PRIMARY KEY,
+  still_fn VARCHAR(255),
+  video_fn VARCHAR(255),
+  exif TEXT
+);
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) UNIQUE,
+  password VARCHAR(255),
+  photo_id INTEGER REFERENCES photos(id)
+);
+
+

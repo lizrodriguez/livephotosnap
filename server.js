@@ -1,0 +1,134 @@
+const express = require('express');
+const app = express();
+
+const pgp = require('pg-promise')();
+const mustacheExpress = require('mustache-express');
+const bodyParser = require("body-parser");
+const session = require('express-session');
+const methodOverride = require('method-override');
+const bcrypt = require('bcrypt');
+const salt = bcrypt.genSalt(10);
+const multer  =   require('multer');
+
+var storage =  multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './uploads');
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.originalname);
+  }
+});
+var upload = multer({ storage : storage }).array('userPhoto',2);
+
+app.engine('html', mustacheExpress());
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+app.use("/", express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(methodOverride('_method'))
+
+app.use(session({
+  secret: 'super_secred_string',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
+
+var db = pgp('postgres://liz@localhost:5432/project4_db');
+
+app.listen(3000, function () {
+  console.log('Server running, listening on port 3000 ┬──┬◡ﾉ(°-°ﾉ)');
+});
+
+app.get('/', function(req, res){
+    res.render('login/index');
+});
+
+app.get('/gallery', function(req, res){
+  if(req.session.user){
+    let data = {
+      "logged_in": true,
+      "email": req.session.user.email
+    };
+    res.render('gallery/index', data);
+  } else {
+    res.render('login/index');
+  }
+});
+
+app.get('/tryagain', function(req, res){
+  res.render('login/tryagain');
+});
+
+
+app.post('/login', function(req, res){
+  let data = req.body;
+  let auth_error = "Authorization Failed: Invalid email/password";
+  db
+    .one("SELECT * FROM users WHERE email = $1", [data.email])
+    .catch(function(){
+      res.redirect("login/tryagain");
+    })
+    .then(function(user){
+      bcrypt.compare(data.password, user.password, function(err, cmp){
+        if(cmp){
+          req.session.user = user;
+          res.redirect("/gallery");
+        } else {
+          res.redirect("/tryagain");
+        }
+      });
+    });
+});
+
+app.get('/gallery', function(req, res){
+    res.render('gallery/index');
+});
+
+app.get('/gallery/upload', function(req, res){
+    res.render('gallery/upload');
+});
+
+app.get('/signup', function(req, res){
+  res.render('signup/index');
+});
+
+app.get('/signup/tryagain', function(req, res){
+  res.render('signup/tryagain');
+});
+
+app.post('/signup', function(req, res){
+  let data = req.body;
+  bcrypt
+    .hash(data.password, 10, function(err, hash){
+      db.none(
+        "INSERT INTO users (email, password) VALUES ($1, $2)",
+        [data.email, hash]
+      ).catch(function(e){
+        res.redirect('/signup/tryagain');
+      }).then(function(){
+        console.log(data.email + hash + " User created! ");
+        res.redirect('login/index');
+        // res.send("user created!");
+      });
+    });
+});
+
+//multer
+app.get('/gallery/upload', function(req, res){
+  // res.render('/gallery/index');
+  res.sendFile(__dirname + "/index.html");
+});
+
+app.post('/gallery/upload',function(req,res){
+    upload(req,res,function(err) {
+        //console.log(req.body);
+        //console.log(req.files);
+        if(err) {
+            return res.end("Error uploading file.");
+        }
+        // res.end("File is uploaded");
+        res.redirect('/');
+    });
+});

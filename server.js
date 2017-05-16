@@ -24,6 +24,7 @@ app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.use("/", express.static(__dirname + '/public'));
+app.use("/", express.static(__dirname + '/')); //so uploads can be viewed
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'))
@@ -45,6 +46,38 @@ app.get('/', function(req, res){
     res.render('login/index');
 });
 
+app.get('/user', function(req, res){
+  if(req.session.user){
+    let data = {
+      "logged_in": true,
+      "email": req.session.user.email
+    };
+    res.render('user/index', data);
+  } else {
+    res.render('user/index');
+  }
+});
+
+app.put('/user', function(req, res){
+  db
+    .none("UPDATE users SET email = $1 WHERE email = $2",
+      [req.body.email, req.session.user.email])
+      .then(function(){
+      res.redirect("/user/success");
+    })
+      .catch(function(){
+        res.redirect('/user/tryagain');
+    });
+});
+
+app.get('/user/success', function(req, res){
+  res.render('user/success');
+});
+
+app.get('/user/tryagain', function(req, res){
+  res.render('user/tryagain');
+});
+
 app.get('/gallery', function(req, res){
   if(req.session.user){
     let data = {
@@ -55,6 +88,16 @@ app.get('/gallery', function(req, res){
   } else {
     res.render('login/index');
   }
+});
+
+app.get('/gallery', function(req, res){
+  db.any("SELECT * FROM photos")
+    .then(function(data){
+        let photos_data = {
+          photos: data
+          }
+      res.render('gallery/index', photos_data);
+    });
 });
 
 app.get('/tryagain', function(req, res){
@@ -68,7 +111,7 @@ app.post('/login', function(req, res){
   db
     .one("SELECT * FROM users WHERE email = $1", [data.email])
     .catch(function(){
-      res.redirect("login/tryagain");
+      res.redirect("/tryagain");
     })
     .then(function(user){
       bcrypt.compare(data.password, user.password, function(err, cmp){
@@ -109,26 +152,79 @@ app.post('/signup', function(req, res){
         res.redirect('/signup/tryagain');
       }).then(function(){
         console.log(data.email + hash + " User created! ");
-        res.redirect('login/index');
+        res.redirect('/');
         // res.send("user created!");
       });
     });
 });
 
+app.get('/user/show', function(req, res){
+  db
+  .any("SELECT * FROM users")
+  .then(function(data){
+    let user_data = {
+      users: data
+    }
+    res.render('user/show', user_data);
+  })
+});
+
+
+app.get('/user/show/:id', function(req,res){
+  let id = req.params.id;
+  db
+  .one("SELECT * FROM users WHERE id = $1", [id])
+  .then(function(data){
+    let user_data = {
+      users: data
+    }
+    res.render("/user/show/", user_data);
+  });
+});
+
+app.get('/delete/:id', function (req, res){
+  let id = req.params.id;
+  db
+  .none("DELETE FROM users WHERE id = $1", [id])
+  .then(function(){
+  res.redirect("/user/success");
+  })
+  .catch(function(){
+    res.redirect('/user/tryagain');
+  });
+});
+
+app.get('/logout', function(req, res){
+  req.session.user = false;
+  res.redirect("/");
+});
+
+
 //multer
 app.get('/gallery/upload', function(req, res){
-  // res.render('/gallery/index');
   res.sendFile(__dirname + "/index.html");
 });
 
 app.post('/gallery/upload',function(req,res){
     upload(req,res,function(err) {
-        //console.log(req.body);
-        //console.log(req.files);
-        if(err) {
-            return res.end("Error uploading file.");
-        }
-        // res.end("File is uploaded");
-        res.redirect('/');
+      let data=req.files;
+      db.none(
+        "INSERT INTO photos (filename, mimetype, path) VALUES ($1, $2, $3)",
+        [data[0].filename, data[0].mimetype, data[0].path]
+      )
+      .then(function(){
+      res.redirect("/gallery/upload");
+      })
+      .catch(function(){
+        return res.end("Error uploading file.");
+      });
+          // console.log(req.body);
+          console.log(req.files);
+        // if(err) {
+        //     return res.end("Error uploading file.");
+        // }
+        // res.redirect('/gallery/upload');
     });
 });
+
+

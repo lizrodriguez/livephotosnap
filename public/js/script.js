@@ -22,4 +22,6 @@ document.body.appendChild(myNewPlayer);
 LivePhotosKit.Player(document.getElementById('LivePhoto'));
 
 
+
+
 });

@@ -3,9 +3,10 @@ DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE photos (
   id SERIAL PRIMARY KEY,
-  still_fn VARCHAR(255),
-  video_fn VARCHAR(255),
-  exif TEXT
+  fieldname VARCHAR(255),
+  filename VARCHAR(255),
+  mimetype VARCHAR(255),
+  path VARCHAR(255)
 );
 
 CREATE TABLE users (

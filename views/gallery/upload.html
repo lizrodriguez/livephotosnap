@@ -8,19 +8,17 @@
 <div id="layout">
   {{> header}}
   <div class="content">
+  <br>
+    <form class="pure-form"  id="uploadForm"
+            enctype="multipart/form-data"
+            action="/gallery/upload"
+            method="post">
+        <input type="file" name="userPhoto" multiple />
+        <input type="submit" value="Upload Image" name="submit" class="pure-button pure-button-primary">
+        <!-- <input type='text' id='random' name='random'><br> -->
+        <span id = "status"></span>
+      </form>
 
-<form class="pure-form"  id="uploadForm"
-          enctype="multipart/form-data"
-          action="/gallery/upload"
-          method="post">
-      <input type="file" name="userPhoto" multiple />
-      <input type="submit" value="Upload Image" name="submit" class="pure-button pure-button-primary">
-      <input type='text' id='random' name='random'><br>
-      <span id = "status"></span>
-    </form>
-
-
-    <p><a href="/logout">Logout</a></p>
 
     </div>
 </div>

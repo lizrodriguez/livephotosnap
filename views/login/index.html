@@ -21,18 +21,17 @@
 
     <!-- if not logged in -->
     {{^logged_in}}
+    <h3>Log in to upload some live photos!</h3>
     <form  class="pure-form" action="/login" method="post">
 
-        <h3>Log in to upload some live photos!</h3>
+      <input name="email" type="text" class="form-control" id="inputEmail" placeholder="Email">
+      <label for="email"></label>
 
-          <input name="email" type="text" class="form-control" id="inputEmail" placeholder="Email">
-          <label for="email"></label>
+      <input id="password" type="password" name="password" class="validate" placeholder="password">
+      <label for="password"> </label>
 
-            <input id="password" type="password" name="password" class="validate" placeholder="password">
-            <label for="password"> </label>
-
-        <button type="submit" class="pure-button pure-button-primary">Login</button>
-        or <a href="/signup">sign up!</a>
+    <button type="submit" class="pure-button pure-button-primary">Login</button>
+    or <a href="/signup">sign up!</a>
 
       </form>
     </div>

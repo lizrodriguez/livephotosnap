@@ -8,7 +8,7 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const bcrypt = require('bcrypt');
 const salt = bcrypt.genSalt(10);
-const multer  =   require('multer');
+const multer = require('multer');
 
 var storage =  multer.diskStorage({
   destination: function (req, file, callback) {
@@ -46,6 +46,19 @@ app.get('/', function(req, res){
     res.render('login/index');
 });
 
+
+app.get('/login', function(req, res){
+  if(req.session.user){
+    let data = {
+      "logged_in": true,
+      "email": req.session.user.email
+    };
+    res.render('login/index', data);
+  } else {
+    res.render('login/index');
+  }
+});
+
 app.get('/user', function(req, res){
   if(req.session.user){
     let data = {
@@ -56,6 +69,18 @@ app.get('/user', function(req, res){
   } else {
     res.render('user/index');
   }
+});
+
+app.get('/user', function(req, res){
+  res.render('user/index');
+});
+
+app.get('/user/success', function(req, res){
+  res.render('user/success');
+});
+
+app.get('/user/tryagain', function(req, res){
+  res.render('user/tryagain');
 });
 
 app.put('/user', function(req, res){
@@ -70,13 +95,6 @@ app.put('/user', function(req, res){
     });
 });
 
-app.get('/user/success', function(req, res){
-  res.render('user/success');
-});
-
-app.get('/user/tryagain', function(req, res){
-  res.render('user/tryagain');
-});
 
 app.get('/gallery', function(req, res){
   if(req.session.user){
@@ -86,7 +104,7 @@ app.get('/gallery', function(req, res){
     };
     res.render('gallery/index', data);
   } else {
-    res.render('login/index');
+    res.render('gallery/index');
   }
 });
 
@@ -117,7 +135,7 @@ app.post('/login', function(req, res){
       bcrypt.compare(data.password, user.password, function(err, cmp){
         if(cmp){
           req.session.user = user;
-          res.redirect("/gallery");
+          res.redirect("gallery");
         } else {
           res.redirect("/tryagain");
         }

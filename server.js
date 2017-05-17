@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const env = require('env2')('./.env');
+console.log(process.env.API_KEY);
 
 const pgp = require('pg-promise')();
 const mustacheExpress = require('mustache-express');

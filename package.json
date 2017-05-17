@@ -11,6 +11,8 @@
   "dependencies": {
     "bcrypt": "^1.0.2",
     "body-parser": "^1.17.1",
+    "env2": "^2.2.0",
+    "exif-js": "^2.2.1",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
     "method-override": "^2.3.8",

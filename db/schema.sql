@@ -3,7 +3,6 @@ DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE photos (
   id SERIAL PRIMARY KEY,
-  fieldname VARCHAR(255),
   filename VARCHAR(255),
   mimetype VARCHAR(255),
   path VARCHAR(255)

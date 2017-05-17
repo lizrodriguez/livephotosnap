@@ -53,7 +53,7 @@ app.get('/login', function(req, res){
       "logged_in": true,
       "email": req.session.user.email
     };
-    res.render('login/index', data);
+    res.render('gallery/index', data);
   } else {
     res.render('login/index');
   }
@@ -95,54 +95,42 @@ app.put('/user', function(req, res){
     });
 });
 
-app.get('/gallery', function(req, res){
+
+// app.get('/gallery', function(req, res){
+//   if(req.session.user){
+//     let data = {
+//       "logged_in": true,
+//       "email": req.session.user.email
+//     };
+//     res.render('gallery/index', data);
+//   } else {
+//     res.render('gallery/index');
+//   }
+// });
+
+app.get('/gallery/', function(req, res){
   db
   .any("SELECT * FROM photos")
-    .then(function(data){
-        let photos_data = {
-          photos: data
-          }
-      res.render('gallery/index', photos_data);
-    });
-});
-
-app.get('/gallery/upload', function(req, res){
-    res.render('gallery/upload');
-});
-//multer
-app.get('/gallery/upload', function(req, res){
-  res.sendFile(__dirname + "/index.html");
-});
-
-app.post('/gallery/upload',function(req,res){
-    upload(req,res,function(err) {
-      let data=req.files;
-      db.none(
-        "INSERT INTO photos (filename, mimetype, path) VALUES ($1, $2, $3)",
-        [data[0].filename, data[0].mimetype, data[0].path]
-      )
-      .then(function(){
-      res.redirect("/gallery/upload");
-      })
-      .catch(function(){
-        return res.end("Error uploading file.");
-      });
-          // console.log(req.body);
-          console.log(req.files);
-    });
+  .then(function(data){
+    console.log(data);
+    let photos_data = {
+      photos: data
+    }
+    res.render('gallery/index', photos_data);
+  })
 });
 
 app.get('/gallery/:id', function(req, res){
   let id = req.params.id;
   db.one("SELECT * FROM photos WHERE id = $1", id)
     .then(function(data){
+      console.log(data);
       let photos_data = {
         photos: data
       }
        res.render("gallery/show", photos_data);
      })
-   });
-
+   })
 
 app.get('/tryagain', function(req, res){
   res.render('login/tryagain');
@@ -169,6 +157,14 @@ app.post('/login', function(req, res){
     });
 });
 
+app.get('/gallery', function(req, res){
+    res.render('gallery/index');
+});
+
+app.get('/gallery/upload', function(req, res){
+    res.render('gallery/upload');
+});
+
 app.get('/signup', function(req, res){
   res.render('signup/index');
 });
@@ -189,6 +185,7 @@ app.post('/signup', function(req, res){
       }).then(function(){
         console.log(data.email + hash + " User created! ");
         res.redirect('/');
+        // res.send("user created!");
       });
     });
 });
@@ -232,6 +229,31 @@ app.get('/delete/:id', function (req, res){
 app.get('/logout', function(req, res){
   req.session.user = false;
   res.redirect("/");
+});
+
+
+//multer
+app.get('/gallery/upload', function(req, res){
+  res.sendFile(__dirname + "/index.html");
+});
+
+app.post('/gallery/upload',function(req,res){
+    upload(req,res,function(err) {
+      let data=req.files;
+      db.none(
+        "INSERT INTO photos (filename, mimetype, path) VALUES ($1, $2, $3)",
+        [data[0].filename, data[0].mimetype, data[0].path]
+      )
+      .then(function(){
+        console.log(req.files);
+      res.redirect("/gallery/upload");
+      })
+      .catch(function(){
+        return res.end("Error uploading file.");
+      });
+        // console.log(req.body);
+        console.log(req.files);
+    });
 });
 
 

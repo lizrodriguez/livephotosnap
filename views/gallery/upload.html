@@ -8,6 +8,7 @@
 <div id="layout">
   {{> header}}
   <div class="content">
+
   <h3>Would you like to upload a photo and mov file?</h3>
     <form class="pure-form"  id="uploadForm"
             enctype="multipart/form-data"
@@ -15,7 +16,7 @@
             method="post">
         <input type="file" name="userPhoto" multiple />
         <input type="submit" value="Upload Image" name="submit" class="pure-button pure-button-primary">
-        <!-- <input type='text' id='random' name='random'><br> -->
+<!--         <input type='text' id='random' name='random'><br> -->
         <span id = "status"></span>
       </form>
 

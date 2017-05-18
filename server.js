@@ -97,6 +97,7 @@ app.put('/user', function(req, res){
     });
 });
 
+
 app.get('/gallery', function(req, res){
   db
   .any("SELECT * FROM photos")
@@ -106,6 +107,11 @@ app.get('/gallery', function(req, res){
           }
       res.render('gallery/index', photos_data);
     });
+});
+
+//render goal page
+app.get('/gallery/goal', function(req, res){
+  res.render('gallery/goal');
 });
 
 app.get('/gallery/upload', function(req, res){
@@ -144,6 +150,7 @@ app.get('/gallery/:id', function(req, res){
        res.render("gallery/show", photos_data);
      })
    });
+
 
 
 app.get('/tryagain', function(req, res){

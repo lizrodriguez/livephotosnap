@@ -97,7 +97,6 @@ app.put('/user', function(req, res){
     });
 });
 
-
 app.get('/gallery', function(req, res){
   db
   .any("SELECT * FROM photos")
@@ -150,7 +149,6 @@ app.get('/gallery/:id', function(req, res){
        res.render("gallery/show", photos_data);
      })
    });
-
 
 
 app.get('/tryagain', function(req, res){
@@ -232,6 +230,18 @@ app.get('/delete/:id', function (req, res){
   .none("DELETE FROM users WHERE id = $1", [id])
   .then(function(){
   res.redirect("/user/success");
+  })
+  .catch(function(){
+    res.redirect('/user/tryagain');
+  });
+});
+
+app.get('/gallery/delete/:id', function (req, res){
+  let id = req.params.id;
+  db
+  .none("DELETE FROM photos WHERE id = $1", [id])
+  .then(function(){
+  res.redirect("/gallery");
   })
   .catch(function(){
     res.redirect('/user/tryagain');

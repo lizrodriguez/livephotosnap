@@ -16,10 +16,9 @@ $(document).ready(function() {
     });
 
 
-// A Player built from a new DIV:
 const myNewPlayer = LivePhotosKit.Player();
 document.body.appendChild(myNewPlayer);
-// A Player built from a pre-existing element:
+
 LivePhotosKit.Player(document.getElementById('LivePhoto'));
 
 window.onload=function() {
@@ -28,9 +27,9 @@ window.onload=function() {
         var allMetaData = EXIF.getAllTags(this);
 
         var GPSLatitude = EXIF.getTag(this, "GPSLatitude");
-          // console.log(GPSLatitude[0].numerator);
+
         var GPSLongitude = EXIF.getTag(this, "GPSLongitude");
-          // console.log(GPSLongitude[0].numerator);
+          console.log(allMetaData);
 
         var GPSLatitudeConverted = GPSLatitude[0].numerator + GPSLatitude[1].numerator /
            (60 * GPSLatitude[1].denominator) + GPSLatitude[2].numerator / (3600 * GPSLatitude[2].denominator);
@@ -42,7 +41,14 @@ window.onload=function() {
         console.log(GPSLatitudeConverted);
         console.log(GPSLongitudeConverted);
         var map = document.getElementById("map");
-        map.innerHTML ="<img src='https://maps.googleapis.com/maps/api/staticmap?=" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&zoom=14&size=600x400&maptype=roadmap&markers=color:red%7Clabel:%7C" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&key=AIzaSyCrKjo4E_YfucBPbXszsDj4nhLyfffzWm4'>";
+        map.innerHTML ="<img src='https://maps.googleapis.com/maps/api/staticmap?=" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&zoom=14&size=500x400&maptype=roadmap&markers=color:red%7Clabel:%7C" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&key=AIzaSyCrKjo4E_YfucBPbXszsDj4nhLyfffzWm4'>";
+
+
+        var make = EXIF.getTag(this, "Make");
+        var model = EXIF.getTag(this, "Model");
+        var makeAndModel = document.getElementById("makeAndModel");
+        makeAndModel.innerText = make + " " + model;
+
     });
  };
 

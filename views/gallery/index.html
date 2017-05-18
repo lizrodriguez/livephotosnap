@@ -8,7 +8,7 @@
 <div id="layout">
   {{> header}}
   <div class="content">
-  <div class="pure-g l-box">
+    <div class="pure-g l-box">
     {{#photos}}
       <div class="pure-u-md-1-3 l-box">
         <div id="LivePhoto"
@@ -21,19 +21,7 @@
       </div>
     {{/photos}}
     </div>
-<!--<div class="pure-g">
-    {{#photos}}
-      <div class="pure-u-md-1-3 l-box">
-        <div id="LivePhoto"
-          data-live-photo
-          data-photo-src="{{path}}"
-          data-video-src="{{path}}"
-          style="width: 320px; height: 320px">
-        </div>
-        <a href="/gallery/{{id}}">ID{{id}}</a>
-      </div>
-    {{/photos}}
-    </div> -->
+
     <a href="/gallery/upload">Upload</a> a photo<br>
     <a href="/user/show">Update or delete</a> an account<br>
     <a href="/logout">Logout</a>

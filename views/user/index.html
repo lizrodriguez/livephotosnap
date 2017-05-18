@@ -9,25 +9,15 @@
   {{> header}}
   <div class="content">
 
-<!--   {{#logged_in}}
-    <h4>Hello {{email}}!</h4>
-      <form class="pure-form" action="/user?_method=PUT" method="post">
-        <h5>Update your email address:</h5>
-
-            <input name="email" type="text" class="form-control" id="inputEmail" placeholder="Email" value="{{email}}">
-            <label for="email"></label>
-
-            <button type="submit" class="pure-button pure-button-primary">Update</button>
-            <a href="/logout">Logout</a>
-      </form>
-    {{/logged_in}}
- -->
+    <div class="pure-u-1 pure-u-md-1-2">
+      <div class="l-box">
+        <img src="https://media.giphy.com/media/1IDqrFySO6y1a/giphy.gif" alt="All the phones">
+      </div>
+    </div>
 
 
-<!-- if not logged in -->
     {{^logged_in}}
     <form class="pure-form"  action="/login" method="post">
-        <h4>Login</h4>
 
           <input name="email" type="text" class="form-control" id="inputEmail" placeholder="Email">
           <label for="email"></label>

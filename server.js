@@ -38,14 +38,14 @@ app.use(session({
   cookie: { secure: false }
 }))
 
-// var db = pgp('postgres://liz@localhost:5432/project4_db');
+var db = pgp('postgres://liz@localhost:5432/project4_db');
 
-// app.listen(3000, function () {
-//   console.log('Server running, listening on port 3000 ┬──┬◡ﾉ(°-°ﾉ)');
-// });
-app.listen(80, function () {
-  console.log('Server running, listening on port 80 on heroku ┬──┬◡ﾉ(°-°ﾉ)');
+app.listen(3000, function () {
+  console.log('Server running, listening on port 3000 ┬──┬◡ﾉ(°-°ﾉ)');
 });
+// app.listen(80, function () {
+//   console.log('Server running, listening on port 80 on heroku ┬──┬◡ﾉ(°-°ﾉ)');
+// });
 
 app.get('/', function(req, res){
     res.render('user/index');

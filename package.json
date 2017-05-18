@@ -1,10 +1,10 @@
 {
   "name": "livesnapphoto",
   "version": "1.0.0",
-  "engines": {
-    "node": "7.6.0",
-    "npm": "4.3.0"
-  },
+  // "engines": {
+  //   "node": "7.6.0",
+  //   "npm": "4.3.0"
+  // },
   "description": "project 4",
   "main": "server.js",
   "scripts": {

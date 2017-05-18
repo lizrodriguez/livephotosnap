@@ -22,15 +22,10 @@ document.body.appendChild(myNewPlayer);
 // A Player built from a pre-existing element:
 LivePhotosKit.Player(document.getElementById('LivePhoto'));
 
-//get exif data from LivePhoto
-// window.onload=getExif;
-// function getExif() {
 window.onload=function() {
   var img = document.getElementById("img");
     EXIF.getData(img, function() {
         var allMetaData = EXIF.getAllTags(this);
-        // var allMetaDataSpan = document.getElementById("allMetaDataSpan");
-        // allMetaDataSpan.innerHTML = JSON.stringify(allMetaData, null, "\t");
 
         var GPSLatitude = EXIF.getTag(this, "GPSLatitude");
           // console.log(GPSLatitude[0].numerator);

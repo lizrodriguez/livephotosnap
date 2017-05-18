@@ -24,7 +24,7 @@ app.engine('html', mustacheExpress());
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
 app.use("/", express.static(__dirname + '/public'));
-app.use("/", express.static(__dirname + '/')); //so uploads can be viewed
+app.use("/", express.static(__dirname + '/'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'))
@@ -37,10 +37,11 @@ app.use(session({
 }))
 
 // var db = pgp('postgres://liz@localhost:5432/project4_db');
-var db = pgp('postgres://tfzbmcrgpguyia:1b5a9d44cdb456d0039b807985bd631a8495b450d4bb9c4830abcc99bc8baac6@ec2-54-204-0-88.compute-1.amazonaws.com:5432/d75amgk6aeuqju')
+// var db = pgp('postgres://tfzbmcrgpguyia:1b5a9d44cdb456d0039b807985bd631a8495b450d4bb9c4830abcc99bc8baac6@ec2-54-204-0-88.compute-1.amazonaws.com:5432/d75amgk6aeuqju')
+var db = pgp ('DATABASE_URL');
 
-// app.listen(3000, function () {
-app.listen(process.env.PORT || 3000, function () {
+app.listen(3000, function () {
+// app.listen(process.env.PORT || 3000, function () {
   console.log('Server running ┬──┬◡ﾉ(°-°ﾉ)');
 });
 

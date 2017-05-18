@@ -42,7 +42,7 @@ window.onload=function() {
         console.log(GPSLatitudeConverted);
         console.log(GPSLongitudeConverted);
         var map = document.getElementById("map");
-        map.innerHTML ="<img src='https://maps.googleapis.com/maps/api/staticmap?=" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&zoom=14&size=600x400&maptype=roadmap&markers=color:red%7Clabel:%7C" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&key=" + MAP_API_KEY + "'>";
+        map.innerHTML ="<img src='https://maps.googleapis.com/maps/api/staticmap?=" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&zoom=14&size=600x400&maptype=roadmap&markers=color:red%7Clabel:%7C" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&key=AIzaSyCrKjo4E_YfucBPbXszsDj4nhLyfffzWm4'>";
     });
  };
 

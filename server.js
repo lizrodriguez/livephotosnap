@@ -40,7 +40,7 @@ app.use(session({
 
 var db = pgp('postgres://liz@localhost:5432/project4_db');
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log('Server running, listening on port 3000 ┬──┬◡ﾉ(°-°ﾉ)');
 });
 // app.listen(80, function () {

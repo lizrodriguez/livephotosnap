@@ -45,21 +45,21 @@ app.listen(3000, function () {
 });
 
 app.get('/', function(req, res){
-    res.render('login/index');
+    res.render('user/index');
 });
 
 
-app.get('/login', function(req, res){
-  if(req.session.user){
-    let data = {
-      "logged_in": true,
-      "email": req.session.user.email
-    };
-    res.render('login/index', data);
-  } else {
-    res.render('login/index');
-  }
-});
+// app.get('/login', function(req, res){
+//   if(req.session.user){
+//     let data = {
+//       "logged_in": true,
+//       "email": req.session.user.email
+//     };
+//     res.render('login/index', data);
+//   } else {
+//     res.render('login/index');
+//   }
+// });
 
 app.get('/user', function(req, res){
   if(req.session.user){
@@ -147,7 +147,7 @@ app.get('/gallery/:id', function(req, res){
 
 
 app.get('/tryagain', function(req, res){
-  res.render('login/tryagain');
+  res.render('user/tryagain');
 });
 
 
@@ -190,7 +190,7 @@ app.post('/signup', function(req, res){
         res.redirect('/signup/tryagain');
       }).then(function(){
         console.log(data.email + hash + " User created! ");
-        res.redirect('/');
+        res.redirect('user/success');
       });
     });
 });

@@ -38,10 +38,11 @@ app.use(session({
   cookie: { secure: false }
 }))
 
-var db = pgp('postgres://liz@localhost:5432/project4_db');
+// var db = pgp('postgres://liz@localhost:5432/project4_db');
+var db = pgp('postgres://tfzbmcrgpguyia:1b5a9d44cdb456d0039b807985bd631a8495b450d4bb9c4830abcc99bc8baac6@ec2-54-204-0-88.compute-1.amazonaws.com:5432/d75amgk6aeuqju')
 
 app.listen(process.env.PORT || 3000, function () {
-  console.log('Server running, listening on port 3000 ┬──┬◡ﾉ(°-°ﾉ)');
+  console.log('Server running ┬──┬◡ﾉ(°-°ﾉ)');
 });
 // app.listen(80, function () {
 //   console.log('Server running, listening on port 80 on heroku ┬──┬◡ﾉ(°-°ﾉ)');
@@ -51,18 +52,6 @@ app.get('/', function(req, res){
     res.render('user/index');
 });
 
-
-// app.get('/login', function(req, res){
-//   if(req.session.user){
-//     let data = {
-//       "logged_in": true,
-//       "email": req.session.user.email
-//     };
-//     res.render('login/index', data);
-//   } else {
-//     res.render('login/index');
-//   }
-// });
 
 app.get('/user', function(req, res){
   if(req.session.user){

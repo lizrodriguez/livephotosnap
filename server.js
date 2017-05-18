@@ -1,7 +1,5 @@
 const express = require('express');
 const app = express();
-// const env = require('env2')('./.env');
-// console.log(process.env.API_KEY);
 
 const pgp = require('pg-promise')();
 const mustacheExpress = require('mustache-express');
@@ -39,14 +37,13 @@ app.use(session({
 }))
 
 // var db = pgp('postgres://liz@localhost:5432/project4_db');
-var db = pgp('postgres://tfzbmcrgpguyia:1b5a9d44cdb456d0039b807985bd631a8495b450d4bb9c4830abcc99bc8baac6@ec2-54-204-0-88.compute-1.amazonaws.com:5432/d75amgk6aeuqju')
+// var db = pgp('postgres://tfzbmcrgpguyia:1b5a9d44cdb456d0039b807985bd631a8495b450d4bb9c4830abcc99bc8baac6@ec2-54-204-0-88.compute-1.amazonaws.com:5432/d75amgk6aeuqju')
+var db = pgp('DATABASE_URL');
 
+// app.listen(3000, function () {
 app.listen(process.env.PORT || 3000, function () {
   console.log('Server running ┬──┬◡ﾉ(°-°ﾉ)');
 });
-// app.listen(80, function () {
-//   console.log('Server running, listening on port 80 on heroku ┬──┬◡ﾉ(°-°ﾉ)');
-// });
 
 app.get('/', function(req, res){
     res.render('user/index');
@@ -100,7 +97,6 @@ app.get('/gallery', function(req, res){
     });
 });
 
-//render goal page
 app.get('/gallery/goal', function(req, res){
   res.render('gallery/goal');
 });

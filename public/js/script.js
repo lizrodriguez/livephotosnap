@@ -32,7 +32,6 @@ window.onload=function() {
         // var allMetaDataSpan = document.getElementById("allMetaDataSpan");
         // allMetaDataSpan.innerHTML = JSON.stringify(allMetaData, null, "\t");
 
-
         var GPSLatitude = EXIF.getTag(this, "GPSLatitude");
           // console.log(GPSLatitude[0].numerator);
         var GPSLongitude = EXIF.getTag(this, "GPSLongitude");
@@ -48,7 +47,7 @@ window.onload=function() {
         console.log(GPSLatitudeConverted);
         console.log(GPSLongitudeConverted);
         var map = document.getElementById("map");
-        map.innerHTML ="<img src='https://maps.googleapis.com/maps/api/staticmap?=" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&zoom=14&size=600x400&maptype=roadmap&markers=color:red%7Clabel:%7C" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&key=AIzaSyCrKjo4E_YfucBPbXszsDj4nhLyfffzWm4'>";
+        map.innerHTML ="<img src='https://maps.googleapis.com/maps/api/staticmap?=" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&zoom=14&size=600x400&maptype=roadmap&markers=color:red%7Clabel:%7C" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&key=" + MAP_API_KEY + "'>";
     });
  };
 

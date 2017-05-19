@@ -48,7 +48,6 @@ app.get('/', function(req, res){
     res.render('user/index');
 });
 
-
 app.get('/user', function(req, res){
   if(req.session.user){
     let data = {

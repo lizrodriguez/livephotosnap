@@ -22,8 +22,8 @@ PostgreSQL
 [LivePhotosKit JS library]((https://developer.apple.com/live-photos/))
 
 Wireframes:
-![wireframe](https://github.com/lizrodriguez/livephotosnap/blob/master/public/images/wireframe.jpg)
-![erd](https://github.com/lizrodriguez/livephotosnap/blob/master/public/images/erd.jpg)
+![wireframe](https://github.com/lizrodriguez/livephotosnap/blob/master/public/images/wireframe.JPG)
+![erd](https://github.com/lizrodriguez/livephotosnap/blob/master/public/images/erd.JPG)
 
 
 Unsolved issues:

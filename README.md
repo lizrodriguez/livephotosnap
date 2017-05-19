@@ -22,6 +22,10 @@ PostgreSQL
 [LivePhotosKit JS library]((https://developer.apple.com/live-photos/))
 
 Wireframes:
+![wireframe](https://github.com/lizrodriguez/livephotosnap/blob/master/public/images/wireframe.jpg)
+![erd](https://github.com/lizrodriguez/livephotosnap/blob/master/public/images/erd.jpg)
 
 
-Unsolved Problems:
+Unsolved issues:
+
+The major problem I ran into was that the Live Photos in the gallery don't display properly due to the nature of needing to upload 2 files at once, a .jpg and .mov. I will need to find a way for uploading straight from the iPhone to this web app. Ideally this would be a mobile phone app in the future. I also need to retrieve both .jpg and .mov from the database to my template engine. The ideal gallery would show up as in this [link](http://livephotosnap.herokuapp.com/gallery/goal).

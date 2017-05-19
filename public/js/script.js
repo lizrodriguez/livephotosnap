@@ -38,11 +38,11 @@ window.onload=function() {
            (60 * GPSLongitude[1].denominator) + GPSLongitude[2].numerator / (3600 * GPSLongitude[2].denominator);
 
 
-        console.log(GPSLatitudeConverted);
-        console.log(GPSLongitudeConverted);
-        var map = document.getElementById("map");
-        map.innerHTML ="<img src='https://maps.googleapis.com/maps/api/staticmap?=" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&zoom=14&size=500x400&maptype=roadmap&markers=color:red%7Clabel:%7C" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&key=AIzaSyCrKjo4E_YfucBPbXszsDj4nhLyfffzWm4'>";
+        console.log("Latitude is: " + GPSLatitudeConverted);
+        console.log("Longitude is: " + GPSLongitudeConverted);
 
+        var map = document.getElementById("map");
+        map.innerHTML ="<img src='https://maps.googleapis.com/maps/api/staticmap?center=" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&zoom=12&size=600x400&maptype=roadmap&markers=color:red%7Clabel:%7C" + GPSLatitudeConverted + ",-" + GPSLongitudeConverted + "&key=AIzaSyCrKjo4E_YfucBPbXszsDj4nhLyfffzWm4'>";
 
         var make = EXIF.getTag(this, "Make");
         var model = EXIF.getTag(this, "Model");

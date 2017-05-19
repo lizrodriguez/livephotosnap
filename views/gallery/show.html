@@ -10,7 +10,7 @@
 
   <div class="content l-box">
     <div class="pure-u-md-1-3 l-box">
-    <h4 id="makeAndModel"></h4><br>
+    <h3 id="makeAndModel"></h3><br><br>
       {{#photos}}
       <img src="../{{path}}" id="img" height="240px" width="320px" class="rotate90">
       {{/photos}}
@@ -19,11 +19,11 @@
     <div class="pure-u-md-1-3 l-box" id="map">
     </div>
 
-<div class="pure-menu pure-u-1-3">
+<div class="pure-u-md-1-3 l-box">
     {{#photos}}
       <ul class="pure-menu-list">
         <li class="pure-menu-item">
-          <a href="/gallery/delete/{{id}}" class="pure-menu-link">Delete Image</a>
+          <a class="pure-button pure-button-primary" href="/gallery/delete/{{id}}" class="pure-menu-link">Delete Image</a>
         </li>
       </ul>
     {{/photos}}

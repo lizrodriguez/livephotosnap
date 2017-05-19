@@ -10,24 +10,19 @@
   <div class="content">
 
     <div class="pure-u-1 pure-u-md-1-2">
-      <div class="l-box">
-        <img src="https://media.giphy.com/media/1IDqrFySO6y1a/giphy.gif" alt="All the phones">
-      </div>
+      <img src="./images/frontpage.jpg" height="500px" alt="Take a Live Photo!">
     </div>
 
 
-    {{^logged_in}}
-    <form class="pure-form"  action="/login" method="post">
+  {{^logged_in}}
+  <form class="pure-form"  action="/login" method="post">
+    <input name="email" type="text" class="form-control" id="inputEmail" placeholder="Email">
+    <label for="email"></label>
 
-          <input name="email" type="text" class="form-control" id="inputEmail" placeholder="Email">
-          <label for="email"></label>
-
-            <input id="password" type="password" name="password" class="validate" placeholder="password">
-            <label for="password"></label>
-
-            <button type="submit" class="pure-button pure-button-primary">Login</button>
-            or <a href="/signup">sign up!</a>
-
+    <input id="password" type="password" name="password" class="validate" placeholder="password">
+    <label for="password"></label>
+    <button type="submit" class="pure-button pure-button-primary">Login</button>
+    or <a class="pure-button pure-button-primary" href="/signup">sign up!</a>
     </form>
 
       {{/logged_in}}

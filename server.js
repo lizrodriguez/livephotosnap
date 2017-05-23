@@ -36,11 +36,11 @@ app.use(session({
   cookie: { secure: false }
 }))
 
-// var db = pgp('postgres://liz@localhost:5432/project4_db');
-var db = pgp('postgres://tfzbmcrgpguyia:1b5a9d44cdb456d0039b807985bd631a8495b450d4bb9c4830abcc99bc8baac6@ec2-54-204-0-88.compute-1.amazonaws.com:5432/d75amgk6aeuqju')
+var db = pgp('postgres://liz@localhost:5432/project4_db');
+// var db = pgp('postgres://tfzbmcrgpguyia:1b5a9d44cdb456d0039b807985bd631a8495b450d4bb9c4830abcc99bc8baac6@ec2-54-204-0-88.compute-1.amazonaws.com:5432/d75amgk6aeuqju')
 
-// app.listen(3000, function () {
-app.listen(process.env.PORT || 3000, function () {
+app.listen(3000, function () {
+// app.listen(process.env.PORT || 3000, function () {
   console.log('Server running ┬──┬◡ﾉ(°-°ﾉ)');
 });
 
@@ -93,6 +93,10 @@ app.get('/gallery', function(req, res){
           }
       res.render('gallery/index', photos_data);
     });
+});
+
+app.get('/gallery/intro', function(req, res){
+  res.render('gallery/intro');
 });
 
 app.get('/gallery/goal', function(req, res){

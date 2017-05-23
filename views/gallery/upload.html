@@ -9,14 +9,27 @@
   {{> header}}
   <div class="content">
 
-  <h3>Would you like to upload a photo and mov file?</h3>
+  <h2>How to upload a live photo</h2>
+
+  <h3>Using macOS Photos</h3>
+  <li>Connect your iOS device to your Mac.</li>
+  <li>Import your photos into the Photos application.</li>
+  <li>Select the Live Photo you wish to export.</li>
+  <li>Use File > Export > Export Unmodified Original to export to your file system.</li>
+
+  <h3>Using macOS Image Capture</h3>
+  <li>Connect your iOS device to your Mac.</li>
+  <li>Select the Live Photo you wish to import from your device to your local file system.</li>
+  <li>Choose the destination folder and click on Import.</li>
+
+  <h3>Upload the IMG .jpg, then the IMG .mov file</h3>
+
     <form class="pure-form"  id="uploadForm"
             enctype="multipart/form-data"
             action="/gallery/upload"
             method="post">
         <input type="file" name="userPhoto" multiple />
         <input type="submit" value="Upload Image" name="submit" class="pure-button pure-button-primary">
-<!--         <input type='text' id='random' name='random'><br> -->
         <span id = "status"></span>
       </form>
 
